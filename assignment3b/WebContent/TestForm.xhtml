@@ -1,0 +1,38 @@
+<!-- Taylor Rosby
+CST-235
+ICA2 -->
+
+<!--This file holds the form and allows for user inputted data -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+		<title>JSF Login Page</title>
+</h:head> 
+<body> 
+<!-- Set the layout and title for the page -->
+<ui:composition template= "/layouts/commonLayout.xhtml">
+<ui:define name="title">JSF Login Page</ui:define>
+<ui:define name="content">
+<!-- Login Form -->
+<div align = "center">
+
+	<h:form>
+	<!-- takes input and shows validation errors -->		
+		First Name: <h:inputText id= "firstname" value= "#{user.firstname}" title=""></h:inputText><h:message for="firstname"/><br/>
+		Last Name: <h:inputText id= "lastname" value= "#{user.lastname}" title=""></h:inputText><h:message for="lastname"/><br/>
+		<h:commandButton value="Login" action="#{formController.onSubmit(user)}" /><br/><!-- Managed Bean is a method argument in controller -->
+	</h:form>
+  
+  <!-- prints all the messages -->
+	<h:messages />
+	</div>
+	</ui:define>
+	</ui:composition>
+</body> 
+</html>

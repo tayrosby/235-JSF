@@ -1,0 +1,68 @@
+<!-- Taylor Rosby
+CST-235
+ICA2 -->
+<!--This file shows the data from the form back to the user -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<title>JSF Response Page</title>
+</h:head> 
+
+<body> 
+
+	<!-- Set the layout and title for the page -->
+	<ui:composition template= "/layouts/commonLayout.xhtml">
+	<ui:define name="title">JSF Response Page</ui:define>
+	<ui:define name="content">
+	
+	<!-- table form -->
+	<div align = "center">
+			Hello user #{user.firstname} #{user.lastname}. Your orders are:<br/>
+			<h:dataTable value = "#{orders.orders}" var = "o" styleClass = "order-table" headerClass = "order-table-header" rowClasses = "order-table-odd-row, order-table-even-row">
+			<h:column>
+				<f:facet name="header">Order Number</f:facet>
+				#{o.orderNo}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Product</f:facet>
+				#{o.productName}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Price</f:facet>
+				#{o.price}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Quantity</f:facet>
+				#{o.quantity}
+			</h:column>
+			</h:dataTable>
+			<br/>
+			<h:form>			
+			<h:button value = "Login Again" outcome = "TestForm.xhtml"></h:button>
+			</h:form>
+	
+	<h:form>
+	<!-- shows the message in the popup and keeps it on screen -->
+    <p:growl id="messages" showDetail="true" sticky="true" />
+ 
+ 	<!-- checks to see if the user is idle -->
+    <p:idleMonitor timeout="5000">
+    
+    	<!-- gives a message based on if the user is idle or if they have become active again -->
+        <p:ajax event="idle" listener="#{idleMonitor.onIdle}" update="messages" />
+        <p:ajax event="active" listener="#{idleMonitor.onActive}" update="messages" />
+        
+    </p:idleMonitor>
+    
+  </h:form>
+	</div>
+	</ui:define>
+	</ui:composition>
+</body> 
+</html>
